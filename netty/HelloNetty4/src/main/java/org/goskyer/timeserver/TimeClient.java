@@ -45,6 +45,15 @@ public class TimeClient {
     }
 
     public static void main(String[] args) {
-        new TimeClient().connect(8080, "localhost");
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                new TimeClient().connect(8080, "localhost");
+            }).start();
+        }
     }
 }
